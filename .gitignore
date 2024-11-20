@@ -1,0 +1,5 @@
+ansible/*
+carambus2_api_development.sql
+carambus2_development.sql
+venv/*
+.idea
