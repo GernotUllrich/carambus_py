@@ -2,8 +2,8 @@ import os
 import re
 
 # Pfade anpassen
-RAILS_MODELS_DIR = "rails_models/"  # Verzeichnis mit Rails-Modellen (*.rb)
-DJANGO_MODELS_DIR = "rails_models/"  # Zielverzeichnis für Django-Modelle
+RAILS_MODELS_DIR = "../../rails_models/"  # Verzeichnis mit Rails-Modellen (*.rb)
+DJANGO_MODELS_DIR = "../../rails_models/"  # Zielverzeichnis für Django-Modelle
 
 # Stelle sicher, dass das Zielverzeichnis existiert
 os.makedirs(DJANGO_MODELS_DIR, exist_ok=True)

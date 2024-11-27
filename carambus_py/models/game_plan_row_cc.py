@@ -1,5 +1,5 @@
+from .discipline import Discipline
 from django.db import models
-
 
 class GamePlanRowCc(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -16,8 +16,9 @@ class GamePlanRowCc(models.Model):
     pmv = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    discipline = models.ForeignKey('Discipline', on_delete=models.CASCADE, related_name='game_plan_row_ccs_for_discipline')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE,
+                                   related_name='game_plan_row_ccs_for_discipline')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'game_plan_row_ccs'

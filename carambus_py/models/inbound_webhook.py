@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class InboundWebhook(models.Model):
     id = models.BigAutoField(primary_key=True)
     status = models.IntegerField()
@@ -9,5 +8,5 @@ class InboundWebhook(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'inbound_webhooks'

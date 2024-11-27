@@ -1,5 +1,7 @@
 ansible/*
-carambus2_api_development.sql
-carambus2_development.sql
+stuff/models/*
+stuff/rails_django_migration/carambus2_api_development.sql
+stuff/rails_django_migration/carambus2_development.sql
 venv/*
 .idea
+carambus_py/__pycache__/*

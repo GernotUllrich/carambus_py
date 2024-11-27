@@ -23,6 +23,6 @@ urlpatterns = [
 ]
 
 from django.urls import get_resolver
-import pprint
-
-pprint.pprint(get_resolver().url_patterns)
+# import pprint
+#
+# pprint.pprint(get_resolver().url_patterns)
