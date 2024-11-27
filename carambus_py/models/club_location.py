@@ -1,5 +1,3 @@
-from .club import Club
-from .location import Location
 from django.db import models
 
 class ClubLocation(models.Model):
@@ -7,8 +5,8 @@ class ClubLocation(models.Model):
     status = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='club_locations_for_club')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='club_locations_for_location')
+    club = models.ForeignKey('carambus_py.Club', on_delete=models.CASCADE, related_name='club_locations_for_club')
+    location = models.ForeignKey('carambus_py.Location', on_delete=models.CASCADE, related_name='club_locations_for_location')
 
     class Meta:
         managed = True

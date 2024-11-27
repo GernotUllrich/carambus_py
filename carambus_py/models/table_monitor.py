@@ -1,7 +1,5 @@
-from .game import Game
-from .table import Table
-from .tournament_monitor import TournamentMonitor
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 class TableMonitor(models.Model):
@@ -27,13 +25,13 @@ class TableMonitor(models.Model):
     prev_data = models.TextField(blank=True, null=True)
     prev_tournament_monitor_id = models.IntegerField(blank=True, null=True)
     prev_tournament_monitor_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)  # Polymorphic type
-    tournament_monitor = models.ForeignKey(TournamentMonitor, on_delete=models.CASCADE,
+    tournament_monitor = models.ForeignKey('carambus_py.TournamentMonitor', on_delete=models.CASCADE,
                                            related_name='table_monitors_for_tournament_monitor')
-    game = models.ForeignKey(Game, on_delete=models.SET_NULL, null=True, related_name='table_monitor_for_game')
-    prev_game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='table_monitors_for_prev_game')
+    game = models.ForeignKey('carambus_py.Game', on_delete=models.SET_NULL, null=True, related_name='table_monitor_for_game')
+    prev_game = models.ForeignKey('carambus_py.Game', on_delete=models.CASCADE, related_name='table_monitors_for_prev_game')
     prev_tournament_monitor = GenericForeignKey('prev_tournament_monitor_type',
                                                 'prev_tournament_monitor_id')  # Combined polymorphic field
-    table = models.OneToOneField(Table, on_delete=models.CASCADE, related_name='table_monitors_for_table')
+    table = models.OneToOneField('carambus_py.Table', on_delete=models.CASCADE, related_name='table_monitors_for_table')
 
     class Meta:
         managed = True

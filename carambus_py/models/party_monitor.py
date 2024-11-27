@@ -1,4 +1,3 @@
-from .party import Party
 from django.db import models
 
 class PartyMonitor(models.Model):
@@ -21,7 +20,7 @@ class PartyMonitor(models.Model):
     allow_follow_up = models.BooleanField()
     color_remains_with_set = models.BooleanField()
     kickoff_switches_with = models.CharField(max_length=255, blank=True, null=True)
-    party = models.ForeignKey(Party, on_delete=models.CASCADE, related_name='party_monitor_for_party')
+    party = models.ForeignKey('carambus_py.Party', on_delete=models.CASCADE, related_name='party_monitor_for_party')
 
     # table_monitors = rails_models.RelatedField('TableMonitors', related_name='partymonitor')
 

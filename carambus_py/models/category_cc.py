@@ -1,4 +1,3 @@
-from .branch_cc import BranchCc
 from django.db import models
 
 class CategoryCc(models.Model):
@@ -14,7 +13,7 @@ class CategoryCc(models.Model):
     updated_at = models.DateTimeField()
     # registration_list_ccs = rails_models.RelatedField('RegistrationListCcs', related_name='categorycc')
     # tournament_ccs = rails_models.RelatedField('TournamentCcs', related_name='categorycc')
-    branch_cc = models.ForeignKey(BranchCc, on_delete=models.CASCADE, related_name='category_ccs_for_branch_cc')
+    branch_cc = models.ForeignKey('carambus_py.BranchCc', on_delete=models.CASCADE, related_name='category_ccs_for_branch_cc')
 
     class Meta:
         managed = True

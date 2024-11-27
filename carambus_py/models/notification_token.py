@@ -1,4 +1,3 @@
-from .user import User
 from django.db import models
 
 class NotificationToken(models.Model):
@@ -7,7 +6,7 @@ class NotificationToken(models.Model):
     platform = models.CharField(max_length=255)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('carambus_py.User', on_delete=models.CASCADE)
 
     class Meta:
         managed = True

@@ -1,4 +1,3 @@
-from .region import Region
 from django.db import models
 
 class Club(models.Model):
@@ -21,7 +20,7 @@ class Club(models.Model):
     synonyms = models.TextField(blank=True, null=True)
     source_url = models.CharField(max_length=255, blank=True, null=True)
     sync_date = models.DateTimeField(blank=True, null=True)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='clubs_for_region')
+    region = models.ForeignKey('carambus_py.Region', on_delete=models.CASCADE, related_name='clubs_for_region')
 
     # players = rails_models.RelatedField('Players', related_name='club')
     # season_participations = rails_models.RelatedField('SeasonParticipations', related_name='club')

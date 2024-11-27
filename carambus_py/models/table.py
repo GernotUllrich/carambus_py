@@ -1,7 +1,3 @@
-from .location import Location
-from .table_kind import TableKind
-from .table_local import TableLocal
-from .table_monitor import TableMonitor
 from django.db import models
 
 class Table(models.Model):
@@ -28,13 +24,13 @@ class Table(models.Model):
     scoreboard_on_at = models.DateTimeField(blank=True, null=True)
     scoreboard_off_at = models.DateTimeField(blank=True, null=True)
     heater_auto = models.BooleanField(blank=True, null=True)
-    location = models.ForeignKey(Location, models.DO_NOTHING, blank=True, null=True,
+    location = models.ForeignKey('carambus_py.Location', models.DO_NOTHING, blank=True, null=True,
                                  related_name='tables_for_location')
-    table_kind = models.ForeignKey(TableKind, models.DO_NOTHING, blank=True, null=True,
+    table_kind = models.ForeignKey('carambus_py.TableKind', models.DO_NOTHING, blank=True, null=True,
                                    related_name='tables_for_table_kind')
-    table_monitor = models.ForeignKey(TableMonitor, on_delete=models.DO_NOTHING,
+    table_monitor = models.ForeignKey('carambus_py.TableMonitor', on_delete=models.DO_NOTHING,
                                       related_name='table_for_table_monitor')
-    table_local = models.OneToOneField(TableLocal, on_delete=models.CASCADE, related_name='table_for_table_local')
+    table_local = models.OneToOneField('carambus_py.TableLocal', on_delete=models.CASCADE, related_name='table_for_table_local')
 
     class Meta:
         managed = True

@@ -1,4 +1,3 @@
-from .table import Table
 from django.db import models
 
 class TableLocal(models.Model):
@@ -22,7 +21,7 @@ class TableLocal(models.Model):
     scoreboard = models.BooleanField(blank=True, null=True)
     scoreboard_on_at = models.DateTimeField(blank=True, null=True)
     scoreboard_off_at = models.DateTimeField(blank=True, null=True)
-    table = models.ForeignKey(Table, on_delete=models.CASCADE, related_name='table_local_for_table')
+    table = models.ForeignKey('carambus_py.Table', on_delete=models.CASCADE, related_name='table_local_for_table')
 
     class Meta:
         managed = True

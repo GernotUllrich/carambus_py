@@ -1,15 +1,6 @@
-from .discipline import Discipline
-from .league import League
-from .location import Location
-from .region import Region
-from .season import Season
-from .setting import Setting
-from .tournament_cc import TournamentCc
-from .tournament_local import TournamentLocal
-from .tournament_monitor import TournamentMonitor
-from .tournament_plan import TournamentPlan
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 class Tournament(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -52,23 +43,23 @@ class Tournament(models.Model):
     manual_assignment = models.BooleanField(blank=True, null=True)
     kickoff_switches_with = models.CharField(max_length=255, blank=True, null=True)
     source_url = models.CharField(max_length=255, blank=True, null=True)
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='tournaments_for_discipline')
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='tournaments_for_region')
-    season = models.ForeignKey(Season, on_delete=models.CASCADE, related_name='tournaments_for_season')
-    tournament_plan = models.ForeignKey(TournamentPlan, on_delete=models.CASCADE,
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='tournaments_for_discipline')
+    region = models.ForeignKey('carambus_py.Region', on_delete=models.CASCADE, related_name='tournaments_for_region')
+    season = models.ForeignKey('carambus_py.Season', on_delete=models.CASCADE, related_name='tournaments_for_season')
+    tournament_plan = models.ForeignKey('carambus_py.TournamentPlan', on_delete=models.CASCADE,
                                         related_name='tournaments_for_tournament_plan')
-    league = models.ForeignKey(League, on_delete=models.CASCADE, related_name='tournaments_for_league')
+    league = models.ForeignKey('carambus_py.League', on_delete=models.CASCADE, related_name='tournaments_for_league')
     # seedings = rails_models.RelatedField('Seedings', related_name='tournament')
     # games = rails_models.RelatedField('Games', related_name='tournament')
     # teams = rails_models.RelatedField('Teams', related_name='tournament')
-    tournament_monitor = models.OneToOneField(TournamentMonitor, on_delete=models.CASCADE,
+    tournament_monitor = models.OneToOneField('carambus_py.TournamentMonitor', on_delete=models.CASCADE,
                                               related_name='tournament_for_tournament_monitor')
-    tournament_cc = models.OneToOneField(TournamentCc, on_delete=models.CASCADE,
+    tournament_cc = models.OneToOneField('carambus_py.TournamentCc', on_delete=models.CASCADE,
                                          related_name='tournament_for_tournament_cc')
-    setting = models.OneToOneField(Setting, on_delete=models.CASCADE, related_name='tournaments_for_setting')
+    setting = models.OneToOneField('carambus_py.Setting', on_delete=models.CASCADE, related_name='tournaments_for_setting')
     organizer = GenericForeignKey('organizer_type', 'organizer_id')  # Combined polymorphic field
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='tournaments_for_location')
-    tournament_local = models.OneToOneField(TournamentLocal, on_delete=models.CASCADE,
+    location = models.ForeignKey('carambus_py.Location', on_delete=models.CASCADE, related_name='tournaments_for_location')
+    tournament_local = models.OneToOneField('carambus_py.TournamentLocal', on_delete=models.CASCADE,
                                             related_name='tournament_for_tournament_local')
 
     class Meta:

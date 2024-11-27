@@ -1,4 +1,3 @@
-from .tournament import Tournament
 from django.db import models
 
 class TournamentLocal(models.Model):
@@ -16,7 +15,7 @@ class TournamentLocal(models.Model):
     kickoff_switches_with = models.CharField(max_length=255, blank=True, null=True)
     innings_goal = models.IntegerField(blank=True, null=True)
     balls_goal = models.IntegerField(blank=True, null=True)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+    tournament = models.ForeignKey('carambus_py.Tournament', on_delete=models.CASCADE,
                                    related_name='tournament_local_for_tournament')
 
     class Meta:

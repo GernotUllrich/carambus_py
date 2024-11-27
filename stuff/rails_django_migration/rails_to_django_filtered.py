@@ -8,7 +8,7 @@ inflect_engine = inflect.engine()
 
 RAILS_MODELS_DIR = "../../rails_models/"  # Verzeichnis mit Rails-Modellen (*.rb)
 DJANGO_MODELS_DIR = "../../carambus_py/models_xxx/"  # Zielverzeichnis für Django-Modelle
-DJANGO_EXISTING_MODELS_FILE = "../../carambus_py/models.py"  # Generierte rails_models.py von Django
+DJANGO_EXISTING_MODELS_FILE = "../old_models.py"  # Generierte rails_models.py von Django
 
 os.makedirs(DJANGO_MODELS_DIR, exist_ok=True)
 

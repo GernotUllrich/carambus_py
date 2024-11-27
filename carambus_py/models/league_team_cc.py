@@ -1,5 +1,3 @@
-from .league_cc import LeagueCc
-from .league_team import LeagueTeam
 from django.db import models
 
 class LeagueTeamCc(models.Model):
@@ -10,8 +8,8 @@ class LeagueTeamCc(models.Model):
     data = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    league_cc = models.ForeignKey(LeagueCc, on_delete=models.CASCADE, related_name='league_team_ccs_for_league_cc')
-    league_team = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE,
+    league_cc = models.ForeignKey('carambus_py.LeagueCc', on_delete=models.CASCADE, related_name='league_team_ccs_for_league_cc')
+    league_team = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE,
                                     related_name='league_team_ccs_for_league_team')
 
     # party_a_ccs = rails_models.RelatedField('PartyACcs', related_name='leagueteamcc')

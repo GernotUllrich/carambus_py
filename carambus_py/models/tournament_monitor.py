@@ -1,4 +1,3 @@
-from .tournament import Tournament
 from django.db import models
 
 class TournamentMonitor(models.Model):
@@ -19,7 +18,7 @@ class TournamentMonitor(models.Model):
     allow_follow_up = models.BooleanField()
     allow_overflow = models.BooleanField(blank=True, null=True)
     kickoff_switches_with = models.CharField(max_length=255, blank=True, null=True)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+    tournament = models.ForeignKey('carambus_py.Tournament', on_delete=models.CASCADE,
                                    related_name='tournament_monitor_for_tournament')
 
     # table_monitors = rails_models.RelatedField('TableMonitors', related_name='tournamentmonitor')

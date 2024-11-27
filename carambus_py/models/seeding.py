@@ -1,7 +1,5 @@
-from .discipline import Discipline
-from .league_team import LeagueTeam
-from .player import Player
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 class Seeding(models.Model):
@@ -16,10 +14,10 @@ class Seeding(models.Model):
     rank = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=255, blank=True, null=True)
 
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='seedings_for_player')
-    playing_discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE,
+    player = models.ForeignKey('carambus_py.Player', on_delete=models.CASCADE, related_name='seedings_for_player')
+    playing_discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE,
                                            related_name='seedings_for_discipline')
-    league_team = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE, related_name='seedings_for_league_team')
+    league_team = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE, related_name='seedings_for_league_team')
 
     tournament_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)  # Polymorphic type
     tournament_id = models.PositiveIntegerField()  # Polymorphic object ID

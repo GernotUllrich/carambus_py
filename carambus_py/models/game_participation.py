@@ -1,5 +1,3 @@
-from .game import Game
-from .player import Player
 from django.db import models
 import sys
 
@@ -16,8 +14,8 @@ class GameParticipation(models.Model):
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
     sets = models.IntegerField(blank=True, null=True)
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='game_participations_for_player')
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_participations_for_game')
+    player = models.ForeignKey('carambus_py.Player', on_delete=models.CASCADE, related_name='game_participations_for_player')
+    game = models.ForeignKey('carambus_py.Game', on_delete=models.CASCADE, related_name='game_participations_for_game')
 
     class Meta:
         managed = True

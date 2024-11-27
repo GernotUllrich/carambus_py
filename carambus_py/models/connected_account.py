@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 class ConnectedAccount(models.Model):
     id = models.BigAutoField(primary_key=True)

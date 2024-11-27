@@ -1,7 +1,5 @@
-from .club import Club
-from .player import Player
-from .season import Season
 from django.db import models
+import sys
 
 class SeasonParticipation(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -12,9 +10,9 @@ class SeasonParticipation(models.Model):
     ba_id = models.IntegerField(blank=True, null=True)
     source_url = models.CharField(max_length=255, blank=True, null=True)
     sync_date = models.DateTimeField(blank=True, null=True)
-    season = models.ForeignKey(Season, on_delete=models.CASCADE, related_name='season_participations_for_season')
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='season_participations_for_player')
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='season_participations_for_club')
+    season = models.ForeignKey('carambus_py.Season', on_delete=models.CASCADE, related_name='season_participations_for_season')
+    player = models.ForeignKey('carambus_py.Player', on_delete=models.CASCADE, related_name='season_participations_for_player')
+    club = models.ForeignKey('carambus_py.Club', on_delete=models.CASCADE, related_name='season_participations_for_club')
 
     class Meta:
         managed = True

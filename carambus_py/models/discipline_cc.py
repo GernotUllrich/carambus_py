@@ -1,5 +1,3 @@
-from .branch_cc import BranchCc
-from .discipline import Discipline
 from django.db import models
 
 class DisciplineCc(models.Model):
@@ -9,8 +7,8 @@ class DisciplineCc(models.Model):
     context = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    branch_cc = models.ForeignKey(BranchCc, on_delete=models.CASCADE, related_name='discipline_ccs_for_branch_cc')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='discipline_ccs_for_discipline')
+    branch_cc = models.ForeignKey('carambus_py.BranchCc', on_delete=models.CASCADE, related_name='discipline_ccs_for_branch_cc')
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='discipline_ccs_for_discipline')
 
     class Meta:
         managed = True

@@ -1,10 +1,7 @@
-from .discipline import Discipline
-from .game_plan import GamePlan
-from .league_cc import LeagueCc
-from .region import Region
-from .season import Season
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
+import sys
+from django.contrib.contenttypes.models import ContentType
 
 class League(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -29,11 +26,11 @@ class League(models.Model):
     # parties = rails_models.RelatedField('Parties', related_name='league')
     # tournaments = rails_models.RelatedField('Tournaments', related_name='league')
     tournament = GenericForeignKey('organizer_type', 'organizer_id')  # Combined polymorphic field
-    game_plan = models.ForeignKey(GamePlan, on_delete=models.CASCADE, related_name='leagues_for_game_plan')
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='leagues_for_region')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='leagues_for_discipline')
-    season = models.ForeignKey(Season, on_delete=models.CASCADE, related_name='leagues_for_season')
-    league_cc = models.OneToOneField(LeagueCc, on_delete=models.CASCADE, related_name='league_for_league_cc')
+    game_plan = models.ForeignKey('carambus_py.GamePlan', on_delete=models.CASCADE, related_name='leagues_for_game_plan')
+    region = models.ForeignKey('carambus_py.Region', on_delete=models.CASCADE, related_name='leagues_for_region')
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='leagues_for_discipline')
+    season = models.ForeignKey('carambus_py.Season', on_delete=models.CASCADE, related_name='leagues_for_season')
+    league_cc = models.OneToOneField('carambus_py.LeagueCc', on_delete=models.CASCADE, related_name='league_for_league_cc')
 
     class Meta:
         managed = True

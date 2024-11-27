@@ -4,22 +4,22 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Splits the models.py file into separate files for each model with optimized imports and cleaned definitions."
+    help = "Splits the old_models.py file into separate files for each model with optimized imports and cleaned definitions."
 
     def handle(self, *args, **options):
         app_name = "carambus_py"  # Replace with your app's name
         app_dir = os.path.join(os.getcwd(), app_name)
-        models_file = os.path.join(app_dir, "models.py")
+        models_file = os.path.join(app_dir, "old_models.py")
         output_dir = os.path.join(app_dir, "models")
 
         if not os.path.exists(models_file):
-            self.stderr.write(f"models.py not found in {app_name}.")
+            self.stderr.write(f"old_models.py not found in {app_name}.")
             return
 
         # Ensure the output directory exists
         os.makedirs(output_dir, exist_ok=True)
 
-        # Load the models.py content
+        # Load the old_models.py content
         with open(models_file, "r") as file:
             content = file.read()
 
@@ -28,10 +28,10 @@ class Command(BaseCommand):
         models = re.findall(model_regex, content)
 
         if not models:
-            self.stderr.write("No models found in models.py. Please check the file format.")
+            self.stderr.write("No models found in old_models.py. Please check the file format.")
             return
 
-        self.stdout.write(f"Found {len(models)} models in models.py.")
+        self.stdout.write(f"Found {len(models)} models in old_models.py.")
 
         # Process each model
         for model in models:

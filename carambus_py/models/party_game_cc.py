@@ -1,5 +1,3 @@
-from .party_cc import PartyCc
-from .party_game import PartyGame
 from django.db import models
 
 class PartyGameCc(models.Model):
@@ -13,8 +11,8 @@ class PartyGameCc(models.Model):
     discipline_id = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    party_cc = models.ForeignKey(PartyCc, on_delete=models.CASCADE, related_name='party_game_ccs_for_party_cc')
-    party_game = models.ForeignKey(PartyGame, on_delete=models.CASCADE, related_name='party_game_cc_for_party_game')
+    party_cc = models.ForeignKey('carambus_py.PartyCc', on_delete=models.CASCADE, related_name='party_game_ccs_for_party_cc')
+    party_game = models.ForeignKey('carambus_py.PartyGame', on_delete=models.CASCADE, related_name='party_game_cc_for_party_game')
 
     class Meta:
         managed = True

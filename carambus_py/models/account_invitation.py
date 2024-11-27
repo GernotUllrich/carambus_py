@@ -1,10 +1,8 @@
-from .account import Account
-from .user import User
 from django.db import models
 
 class AccountInvitation(models.Model):
     id = models.BigAutoField(primary_key=True)
-    invited_by = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True,
+    invited_by = models.ForeignKey('carambus_py.User', models.DO_NOTHING, blank=True, null=True,
                                    related_name='account_invitations_for_user')
     token = models.CharField(unique=True, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -12,7 +10,7 @@ class AccountInvitation(models.Model):
     roles = models.JSONField()
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    account = models.ForeignKey('carambus_py.Account', on_delete=models.CASCADE)
 
     class Meta:
         managed = True

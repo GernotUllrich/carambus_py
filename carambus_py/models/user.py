@@ -1,4 +1,3 @@
-from .player import Player
 from django.db import models
 
 class User(models.Model):
@@ -33,7 +32,7 @@ class User(models.Model):
     username = models.CharField(unique=True, blank=True, null=True)
     firstname = models.CharField(max_length=255, blank=True, null=True)
     lastname = models.CharField(max_length=255, blank=True, null=True)
-    player = models.ForeignKey(Player, models.DO_NOTHING, blank=True, null=True, related_name='admin_user')
+    player = models.ForeignKey('carambus_py.Player', models.DO_NOTHING, blank=True, null=True, related_name='admin_user')
     sign_in_count = models.IntegerField(blank=True, null=True)
     current_sign_in_at = models.DateTimeField(blank=True, null=True)
     last_sign_in_at = models.DateTimeField(blank=True, null=True)

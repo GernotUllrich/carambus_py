@@ -1,5 +1,5 @@
-from .region import Region
 from django.db import models
+import sys
 
 class RegionCc(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -13,7 +13,7 @@ class RegionCc(models.Model):
     public_url = models.CharField(max_length=255, blank=True, null=True)
     username = models.CharField(max_length=255, blank=True, null=True)
     userpw = models.CharField(max_length=255, blank=True, null=True)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='region_ccs_for_region')
+    region = models.ForeignKey('carambus_py.Region', on_delete=models.CASCADE, related_name='region_ccs_for_region')
 
     # branch_ccs = rails_models.RelatedField('BranchCcs', related_name='regioncc')
 

@@ -1,9 +1,8 @@
-from .user import User
 from django.db import models
 
 class ApiToken(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(User, models.DO_NOTHING)
+    user = models.ForeignKey('carambus_py.User', models.DO_NOTHING)
     token = models.CharField(unique=True, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     metadata = models.JSONField(blank=True, null=True)

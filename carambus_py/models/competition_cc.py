@@ -1,5 +1,4 @@
-from .branch_cc import BranchCc
-from .discipline import Discipline
+import sys
 from django.db import models
 
 class CompetitionCc(models.Model):
@@ -9,8 +8,8 @@ class CompetitionCc(models.Model):
     context = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    branch_cc = models.ForeignKey(BranchCc, on_delete=models.CASCADE, related_name='competition_ccs_for_branch_cc')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE,
+    branch_cc = models.ForeignKey('carambus_py.BranchCc', on_delete=models.CASCADE, related_name='competition_ccs_for_branch_cc')
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE,
                                    related_name='competition_ccs_for_discipline')
 
     # season_ccs = rails_models.RelatedField('SeasonCcs', related_name='competitioncc')

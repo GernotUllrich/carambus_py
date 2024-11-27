@@ -1,4 +1,3 @@
-from .branch_cc import BranchCc
 from django.db import models
 
 class ChampionshipTypeCc(models.Model):
@@ -10,7 +9,7 @@ class ChampionshipTypeCc(models.Model):
     status = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    branch_cc = models.ForeignKey(BranchCc, on_delete=models.CASCADE,
+    branch_cc = models.ForeignKey('carambus_py.BranchCc', on_delete=models.CASCADE,
                                   related_name='championship_type_ccs_for_branch_cc')
 
     class Meta:

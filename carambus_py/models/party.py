@@ -1,8 +1,3 @@
-from .league import League
-from .league_team import LeagueTeam
-from .location import Location
-from .party_cc import PartyCc
-from .party_monitor import PartyMonitor
 from django.db import models
 
 class Party(models.Model):
@@ -41,18 +36,18 @@ class Party(models.Model):
     allow_follow_up = models.BooleanField()
     color_remains_with_set = models.BooleanField()
     kickoff_switches_with = models.CharField(max_length=255, blank=True, null=True)
-    league = models.ForeignKey(League, on_delete=models.CASCADE, related_name='parties_for_league')
+    league = models.ForeignKey('carambus_py.League', on_delete=models.CASCADE, related_name='parties_for_league')
     # games = rails_models.RelatedField('Games', related_name='party')
-    league_team_a = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE, related_name='parties_for_league_team_a')
-    league_team_b = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE,
+    league_team_a = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE, related_name='parties_for_league_team_a')
+    league_team_b = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE,
                                       related_name='parties_for_league_for_league_team_b')
-    host_league_team = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE,
+    host_league_team = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE,
                                          related_name='parties_for_host_league_team')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='parties_for_location')
-    no_show_team = models.ForeignKey(LeagueTeam, on_delete=models.CASCADE, related_name='parties_for_no_show_team')
-    party_monitor = models.OneToOneField(PartyMonitor, on_delete=models.CASCADE,
+    location = models.ForeignKey('carambus_py.Location', on_delete=models.CASCADE, related_name='parties_for_location')
+    no_show_team = models.ForeignKey('carambus_py.LeagueTeam', on_delete=models.CASCADE, related_name='parties_for_no_show_team')
+    party_monitor = models.OneToOneField('carambus_py.PartyMonitor', on_delete=models.CASCADE,
                                          related_name='party_for_party_monitor')
-    party_cc = models.OneToOneField(PartyCc, on_delete=models.CASCADE, related_name='party_for_party_cc')
+    party_cc = models.OneToOneField('carambus_py.PartyCc', on_delete=models.CASCADE, related_name='party_for_party_cc')
 
     # party_games = rails_models.RelatedField('PartyGames', related_name='party')
     # seedings = rails_models.RelatedField('Seedings', related_name='party')

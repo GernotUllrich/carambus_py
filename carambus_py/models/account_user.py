@@ -1,12 +1,13 @@
+import sys
+
 from .account import Account
-from .user import User
 from django.db import models
 from django.db.models import F
 
 class AccountUser(models.Model):
     id = models.BigAutoField(primary_key=True)
-    account = models.ForeignKey(Account, models.CASCADE, related_name='account_users')
-    user = models.ForeignKey(User, models.CASCADE, related_name='account_users')
+    account = models.ForeignKey('carambus_py.Account', models.CASCADE, related_name='account_users')
+    user = models.ForeignKey('carambus_py.User', models.CASCADE, related_name='account_users')
     roles = models.JSONField()
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()

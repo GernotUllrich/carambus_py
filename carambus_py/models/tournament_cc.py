@@ -1,13 +1,5 @@
-from .branch_cc import BranchCc
-from .category_cc import CategoryCc
-from .championship_type_cc import ChampionshipTypeCc
-from .discipline import Discipline
-from .group_cc import GroupCc
-from .location import Location
-from .registration_list_cc import RegistrationListCc
-from .tournament import Tournament
-from .tournament_series_cc import TournamentSeriesCc
 from django.db import models
+import sys
 
 class TournamentCc(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -36,19 +28,19 @@ class TournamentCc(models.Model):
     branch_cc_name = models.CharField(max_length=255, blank=True, null=True)
     category_cc_name = models.CharField(max_length=255, blank=True, null=True)
     championship_type_cc_name = models.CharField(max_length=255, blank=True, null=True)
-    branch_cc = models.ForeignKey(BranchCc, on_delete=models.CASCADE, related_name='tournament_ccs_for_branch_cc')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='tournament_ccs_for_location')
-    registration_list_cc = models.ForeignKey(RegistrationListCc, on_delete=models.CASCADE,
+    branch_cc = models.ForeignKey('carambus_py.BranchCc', on_delete=models.CASCADE, related_name='tournament_ccs_for_branch_cc')
+    location = models.ForeignKey('carambus_py.Location', on_delete=models.CASCADE, related_name='tournament_ccs_for_location')
+    registration_list_cc = models.ForeignKey('carambus_py.RegistrationListCc', on_delete=models.CASCADE,
                                              related_name='tournament_ccs_for_registration_list_cc')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='tournament_ccs_for_discipline')
-    group_cc = models.ForeignKey(GroupCc, on_delete=models.CASCADE, related_name='tournament_ccs_for_group_cc')
-    championship_type_cc = models.ForeignKey(ChampionshipTypeCc, on_delete=models.CASCADE,
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='tournament_ccs_for_discipline')
+    group_cc = models.ForeignKey('carambus_py.GroupCc', on_delete=models.CASCADE, related_name='tournament_ccs_for_group_cc')
+    championship_type_cc = models.ForeignKey('carambus_py.ChampionshipTypeCc', on_delete=models.CASCADE,
                                              related_name='tournament_ccs_for_championship_type_cc')
-    category_cc = models.ForeignKey(CategoryCc, on_delete=models.CASCADE,
+    category_cc = models.ForeignKey('carambus_py.CategoryCc', on_delete=models.CASCADE,
                                     related_name='tournament_ccs_for_category_cc')
-    tournament_series_cc = models.ForeignKey(TournamentSeriesCc, on_delete=models.CASCADE,
+    tournament_series_cc = models.ForeignKey('carambus_py.TournamentSeriesCc', on_delete=models.CASCADE,
                                              related_name='tournament_ccs_for_tournament_series_cc')
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tournament_cc_for_tournament')
+    tournament = models.ForeignKey('carambus_py.Tournament', on_delete=models.CASCADE, related_name='tournament_cc_for_tournament')
 
     class Meta:
         managed = True

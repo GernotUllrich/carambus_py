@@ -1,6 +1,5 @@
-from .competition_cc import CompetitionCc
-from .season import Season
 from django.db import models
+import sys
 
 class SeasonCc(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -9,9 +8,9 @@ class SeasonCc(models.Model):
     context = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    competition_cc = models.ForeignKey(CompetitionCc, on_delete=models.CASCADE,
+    competition_cc = models.ForeignKey('carambus_py.CompetitionCc', on_delete=models.CASCADE,
                                        related_name='season_cc_for_competition_cc')
-    season = models.ForeignKey(Season, on_delete=models.CASCADE, related_name='season_cc_for_season')
+    season = models.ForeignKey('carambus_py.Season', on_delete=models.CASCADE, related_name='season_cc_for_season')
 
     # league_ccs = rails_models.RelatedField('LeagueCcs', related_name='seasoncc')
     # registration_list_ccs = rails_models.RelatedField('RegistrationListCcs', related_name='seasoncc')

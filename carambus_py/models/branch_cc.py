@@ -1,5 +1,4 @@
-from .discipline import Discipline
-from .region_cc import RegionCc
+import sys
 from django.db import models
 
 class BranchCc(models.Model):
@@ -13,9 +12,9 @@ class BranchCc(models.Model):
     # game_plan_ccs = rails_models.RelatedField('GamePlanCcs', related_name='branchcc')
     # group_ccs = rails_models.RelatedField('GroupCcs', related_name='branchcc')
     # registration_list_ccs = rails_models.RelatedField('RegistrationListCcs', related_name='branchcc')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='branch_ccs_for_discipline')
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='branch_ccs_for_discipline')
     # discipline_ccs = rails_models.RelatedField('DisciplineCcs', related_name='branchcc')
-    region_cc = models.ForeignKey(RegionCc, on_delete=models.CASCADE, related_name='branch_ccs_for_region_cc')
+    region_cc = models.ForeignKey('carambus_py.RegionCc', on_delete=models.CASCADE, related_name='branch_ccs_for_region_cc')
 
     # category_ccs = rails_models.RelatedField('CategoryCcs', related_name='branchcc')
     # championship_type_ccs = rails_models.RelatedField('ChampionshipTypeCcs', related_name='branchcc')

@@ -1,6 +1,3 @@
-from .country import Country
-from .region_cc import RegionCc
-from .setting import Setting
 from django.db import models
 
 class Region(models.Model):
@@ -23,16 +20,16 @@ class Region(models.Model):
     cc_id = models.IntegerField(blank=True, null=True)
     scrape_data = models.TextField(blank=True, null=True)
 
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='regions_for_country')
+    country = models.ForeignKey('carambus_py.Country', on_delete=models.CASCADE, related_name='regions_for_country')
     # clubs = rails_models.RelatedField('Clubs', related_name='region')
     # tournaments = rails_models.RelatedField('Tournaments', related_name='region')
     # player_rankings = rails_models.RelatedField('PlayerRankings', related_name='region')
     # locations = rails_models.RelatedField('Locations', related_name='region')
     # organized_tournaments = rails_models.RelatedField('OrganizedTournaments', related_name='region')
     # organized_leagues = rails_models.RelatedField('OrganizedLeagues', related_name='region')
-    setting = models.OneToOneField(Setting, on_delete=models.CASCADE, related_name='region_for_setting')
+    setting = models.OneToOneField('carambus_py.Setting', on_delete=models.CASCADE, related_name='region_for_setting')
     # leagues = rails_models.RelatedField('Leagues', related_name='region')
-    region_cc = models.OneToOneField(RegionCc, on_delete=models.CASCADE, related_name='region_for_region_cc')
+    region_cc = models.OneToOneField('carambus_py.RegionCc', on_delete=models.CASCADE, related_name='region_for_region_cc')
 
     class Meta:
         managed = True

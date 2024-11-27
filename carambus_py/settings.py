@@ -79,7 +79,7 @@ if 'test' in sys.argv:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':test_carambus_py_local:',
+            'NAME': 'test_carambus_py_local',
         }
     }
 else:
@@ -143,4 +143,4 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models_xxx.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

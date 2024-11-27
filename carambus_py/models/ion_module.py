@@ -1,4 +1,3 @@
-from .ion_content import IonContent
 from django.db import models
 
 class IonModule(models.Model):
@@ -10,7 +9,7 @@ class IonModule(models.Model):
     data = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    ion_content = models.ForeignKey(IonContent, on_delete=models.CASCADE, related_name='ion_modules_for_ion_content')
+    ion_content = models.ForeignKey('carambus_py.IonContent', on_delete=models.CASCADE, related_name='ion_modules_for_ion_content')
 
     class Meta:
         managed = True

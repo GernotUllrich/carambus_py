@@ -1,5 +1,3 @@
-from .table_monitor import TableMonitor
-from .tournament import Tournament
 from django.db import models
 
 class Game(models.Model):
@@ -16,11 +14,11 @@ class Game(models.Model):
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
     tournament_type = models.CharField(max_length=255, blank=True, null=True)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='games_for_tournament')
+    tournament = models.ForeignKey('carambus_py.Tournament', on_delete=models.CASCADE, related_name='games_for_tournament')
     # game_participations = rails_models.RelatedField('GameParticipations', related_name='game')
-    table_monitor = models.OneToOneField(TableMonitor, on_delete=models.CASCADE,
+    table_monitor = models.OneToOneField('carambus_py.TableMonitor', on_delete=models.CASCADE,
                                          related_name='game_for_table_monitor')
-    was_table_monitor = models.OneToOneField(TableMonitor, on_delete=models.CASCADE,
+    was_table_monitor = models.OneToOneField('carambus_py.TableMonitor', on_delete=models.CASCADE,
                                              related_name='game_for_was_tournament')
 
     class Meta:

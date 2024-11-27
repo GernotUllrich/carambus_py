@@ -1,4 +1,3 @@
-from .user import User
 from django.db import models
 
 class Player(models.Model):
@@ -33,7 +32,7 @@ class Player(models.Model):
     # registration_ccs = rails_models.RelatedField('RegistrationCcs', related_name='player')
     # party_a_games = rails_models.RelatedField('PartyAGames', related_name='player')
     # party_b_games = rails_models.RelatedField('PartyBGames', related_name='player')
-    # admin_user = models_xxx.OneToOneField(User, on_delete=models_xxx.CASCADE, related_name='player_for_user')
+    # admin_user = models.OneToOneField(User', on_delete=models.CASCADE, related_name='player_for_user')
 
     class Meta:
         managed = True

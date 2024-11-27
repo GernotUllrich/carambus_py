@@ -1,4 +1,3 @@
-from .discipline import Discipline
 from django.db import models
 
 class PlayerClass(models.Model):
@@ -6,7 +5,7 @@ class PlayerClass(models.Model):
     shortname = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='player_classes_for_discipline')
+    discipline = models.ForeignKey('carambus_py.Discipline', on_delete=models.CASCADE, related_name='player_classes_for_discipline')
 
     # player_rankings = rails_models.RelatedField('PlayerRankings', related_name='playerclass')
     # p_player_rankings = rails_models.RelatedField('PPlayerRankings', related_name='playerclass')
