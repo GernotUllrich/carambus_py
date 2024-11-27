@@ -5,6 +5,8 @@ from django.db import models, connection
 from django.core.management import call_command
 from django.conf import settings
 from django.apps import apps
+from carambus_py.models import Season, Setting
+
 
 
 class Version(models.Model):
@@ -49,6 +51,7 @@ ORDER BY sequences.relname;
 
     @classmethod
     def update_carambus(cls):
+        # TODO update_carambus for python hast to be implemented
         url = urljoin(settings.CARAMBUS_API_URL, "/versions/current_revision")
         response = requests.get(url)
         response.raise_for_status()
@@ -120,5 +123,64 @@ ORDER BY sequences.relname;
                         max_id = model.objects.aggregate(models.Max("id"))["id__max"]
                         if max_id:
                             cursor.execute(f"SELECT setval('{table}_id_seq', {max_id + 1})")
+    @classmethod
+    def update_from_carambus_api(cls, opts=None):
+        if opts is None:
+            opts = {}
+        tournament_id = opts.get("update_tournament_from_ba")
+        region_id = (
+                opts.get("reload_tournaments")
+                or opts.get("reload_leagues")
+                or opts.get("reload_leagues_with_details")
+                or opts.get("update_region_from_ba")
+        )
+        league_id = opts.get("update_league_from_ba")
+        club_id = opts.get("update_club_from_ba")
+        force = opts.get("force")
+        player_details = opts.get("player_details")
+        league_details = opts.get("league_details")
+
+        last_version_id = int(Setting.key_get_value("last_version_id", 0))
+        base_url = f"{settings.CARAMBUS_API_URL}/versions/get_updates"
+        params = {
+            "last_version_id": last_version_id,
+            "update_tournament_from_ba": tournament_id,
+            "reload_tournaments": opts.get("reload_tournaments") and region_id,
+            "reload_leagues": opts.get("reload_leagues") and region_id,
+            "reload_leagues_with_details": opts.get("reload_leagues_with_details") and region_id,
+            "update_region_from_ba": opts.get("update_region_from_ba") and region_id,
+            "update_club_from_ba": club_id,
+            "update_league_from_ba": league_id,
+            "force": force,
+            "player_details": player_details,
+            "league_details": league_details,
+            "season_id": Season.current_season().id,
+        }
+
+        # Remove keys with None values
+        params = {k: v for k, v in params.items() if v is not None}
+
+        try:
+            response = requests.get(base_url, params=params)
+            response.raise_for_status()
+            vers = response.json()
+        except requests.HTTPError as e:
+            print(f"HTTPError: {e} while accessing {base_url}")
+            return str(e)
+
+        while vers:
+            h = vers.pop(0)
+            if not h:
+                break
+
+            last_version_id = h.get("id", 0)
+            event = h.get("event")
+            item_type = h.get("item_type")
+            item_id = h.get("item_id")
+            object_changes = h.get("object_changes")
+            object_data = h.get("object")
+
+            if event == "create":
+                cls.handle_create_event(item_type, item_id, object_changes)
 
     # Other methods like last_version, update_from_carambus_api, etc., can be implemented similarly.

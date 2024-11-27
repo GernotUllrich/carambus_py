@@ -1,0 +1,6 @@
+- name: Install application dependencies
+  pip:
+    requirements: "{{ app_directory }}/requirements.txt"
+    virtualenv: "{{ app_directory }}/venv"
+    state: latest
+  when: "'requirements.txt' in lookup('fileglob', '{{ app_directory }}/*')"

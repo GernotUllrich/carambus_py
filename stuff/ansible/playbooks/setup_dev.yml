@@ -1,0 +1,7 @@
+---
+- hosts: development
+  become: no  # No root access needed for development setup
+
+  roles:
+    - common
+    - django

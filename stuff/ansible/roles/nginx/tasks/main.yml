@@ -1,0 +1,35 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Configure Nginx for local server
+  template:
+    src: nginx_local.conf.j2
+    dest: "/etc/nginx/sites-available/{{ project_name }}_local"
+  when: "'local_server' in group_names"
+  notify:
+    - Reload Nginx
+
+- name: Configure Nginx for API server
+  template:
+    src: nginx_api.conf.j2
+    dest: "/etc/nginx/sites-available/{{ project_name }}_api"
+  when: "'api_server' in group_names"
+  notify:
+    - Reload Nginx
+
+- name: Enable Nginx configuration for local server
+  file:
+    src: "/etc/nginx/sites-available/{{ project_name }}_local"
+    dest: "/etc/nginx/sites-enabled/{{ project_name }}_local"
+    state: link
+  when: "'local_server' in group_names"
+
+- name: Enable Nginx configuration for API server
+  file:
+    src: "/etc/nginx/sites-available/{{ project_name }}_api"
+    dest: "/etc/nginx/sites-enabled/{{ project_name }}_api"
+    state: link
+  when: "'api_server' in group_names"

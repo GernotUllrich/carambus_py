@@ -1,0 +1,6 @@
+project_directory: "{{ ansible_env.HOME }}/projects/{{ project_name }}"
+app_directory: "{{ project_directory }}"
+database_name: "{{ project_name }}_dev"
+django_env: development
+app_owner: "{{ ansible_env.USER }}"
+app_group: staff

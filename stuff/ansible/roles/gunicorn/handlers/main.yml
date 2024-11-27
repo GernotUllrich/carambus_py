@@ -1,0 +1,12 @@
+---
+# Handler für systemd
+- name: Reload systemd
+  become: yes
+  command: systemctl daemon-reload
+
+- name: Restart Gunicorn
+  become: yes
+  systemd:
+    name: carambus_py
+    state: restarted
+

@@ -5,6 +5,7 @@ from .address import Address
 from .announcement import Announcement
 from .api_token import ApiToken
 from .branch_cc import BranchCc
+from .branch import Branch
 from .calendar_event import CalendarEvent
 from .category_cc import CategoryCc
 from .championship_type_cc import ChampionshipTypeCc

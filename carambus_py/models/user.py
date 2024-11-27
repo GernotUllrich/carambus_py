@@ -44,7 +44,7 @@ class User(models.Model):
     otp_backup_codes = models.TextField(blank=True, null=True)
     code = models.CharField(max_length=255, blank=True, null=True)
     preferences = models.JSONField(blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True, editable=False)
 
     class Meta:
         managed = True

@@ -1,0 +1,9 @@
+---
+- hosts: local_server:api_server
+  become: yes  # Root privileges required for production servers
+
+  roles:
+    - common
+    - django
+    - gunicorn
+    - nginx

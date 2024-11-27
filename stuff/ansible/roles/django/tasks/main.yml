@@ -1,0 +1,27 @@
+---
+- name: Create application directory
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
+    mode: '0755'
+
+- name: Check if virtual environment exists
+  stat:
+    path: "{{ app_directory }}/venv/bin/activate"
+  register: venv_check
+
+- name: Set up virtual environment
+  command: python3 -m venv "{{ app_directory }}/venv"
+  when: not venv_check.stat.exists
+
+- name: Configure database
+  template:
+    src: settings.py.j2
+    dest: "{{ app_directory }}/{{ project_name }}/settings.py"
+
+- name: Run Django migrations
+  command: "{{ app_directory }}/venv/bin/python manage.py migrate"
+  args:
+    chdir: "{{ app_directory }}"

@@ -1,0 +1,8 @@
+[local_server]
+carambus.de ansible_user=www-data ansible_port=8910
+
+[api_server]
+carambus.de ansible_user=www-data ansible_port=8910
+
+[development]
+localhost ansible_connection=local

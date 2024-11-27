@@ -1,0 +1,12 @@
+---
+- name: Install Gunicorn
+  pip:
+    name: gunicorn
+    virtualenv: "{{ app_directory }}/venv"
+
+- name: Create Gunicorn systemd service
+  template:
+    src: gunicorn.service.j2
+    dest: /etc/systemd/system/{{ project_name }}.service
+  notify:
+    - Reload systemd

@@ -1,0 +1,4 @@
+app_directory: "/var/www/{{ project_name }}"
+database_name: "{{ project_name }}_local"
+app_owner: www-data
+app_group: www-data
